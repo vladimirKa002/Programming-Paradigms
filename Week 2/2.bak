@@ -1,6 +1,5 @@
 #lang racket
 (require redex)
-; Naive recursion
 (define (alternating-sum lst)
   (define (multiplier-helper lst mult)
     (cond
@@ -9,7 +8,6 @@
                (multiplier-helper (rest lst) (* mult -1)))]))
   (multiplier-helper lst 1))
 
-; Tail implementation
 (define (alternating-sum-tail lst)
   (define (multiplier-helper lst current mult)
     (define (helper lst current mult)

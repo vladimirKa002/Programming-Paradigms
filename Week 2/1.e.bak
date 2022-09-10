@@ -1,7 +1,6 @@
 #lang racket
 (require redex)
 (define (decrement lst)
-  ; Skipping leading 0's for the result
   (define (skip-leading lst)
     (cond
       [(empty? lst) (list 0)]
@@ -9,7 +8,6 @@
        (cond
          [(= 0 (first lst)) (skip-leading (rest lst))]
          [else lst])]))
-  ; Checking is input is 0
   (define (is-zero? lst)
     (cond
       [(empty? lst) #t]
@@ -17,7 +15,6 @@
        (cond
          [(= 0 (first lst)) (is-zero? (rest lst))]
          [else #f])]))
-  ; helper for doing a tail recursion
   (define (helper lst result sub)
     (cond
       [(empty? lst) result]
