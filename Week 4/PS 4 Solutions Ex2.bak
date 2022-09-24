@@ -1,0 +1,14 @@
+#lang racket
+(require redex)
+(define (pairs lst)
+  (apply append (map (lambda (x)
+     (map (lambda (y) (cons (list-ref lst x) y))
+         (list-tail lst (+ x 1)))) (range (length lst)))))
+
+
+(define (max-product lst)
+  (foldl (lambda (x res1)
+     (foldl (lambda (y res2) (res2)) 
+     (cond
+       [(< res1 (foldl)) ]
+       [else res1])) -inf.0 lst)))

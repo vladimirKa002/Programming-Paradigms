@@ -1,0 +1,31 @@
+#lang racket
+(require redex)
+(define (max lst)
+  (define (helper lst)
+    (foldl (lambda (x val)
+      (cond
+        [(> x val) x]
+        [else val])) -inf.0 lst))
+  ; If list is empty, return empty list
+  (cond
+    [(= 0 (length lst)) '()]
+    [else (helper lst)]))
+
+(define (second-max lst)
+  (define (helper lst)
+    (second (foldl (lambda (x val)
+      (cond
+        [(empty? val) (append x val)]
+        [(> x (first val)) (append x (list-tail val 1))]
+        [else val])) '() lst)))
+  ; If list has less than 2 elements, return empty list
+  (cond
+    [(< 2 (length lst)) '()]
+    [else (helper lst)]))
+
+(define (group lst)
+  (foldl (lambda (x res)
+     (cond
+      [(and (< 0 (length res)) (equal? x (first (last res))))
+       (append (drop-right res 1) (list (cons x (last res))))]
+      [else (append res (list (list x)))])) '() lst))
