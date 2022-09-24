@@ -1,0 +1,37 @@
+We will consider x as a value and xs as a list of values (non empty).
+values = (cons x xs)
+x = (first values)
+xs = (rest values)
+
+
+(apply + (remove-odd (cons x xs)))
+= (apply + (filter even? (cons x xs)))
+= (apply +
+	(cond 
+		[(even? x) (cons x (filter even? xs))]
+		[else (filter even? xs)]))
+= (cond 
+	[(even? x) (apply + (cons x (filter even? xs)))]
+	[else (apply + (filter even? xs))])
+= (cond 
+	[(even? x) (+ x (apply + (filter even? xs)))]
+	[else (apply + (filter even? xs))])
+= (cond 
+	[(even? x) (+ x (apply + (remove-odd xs)))]
+	[else (apply + (remove-odd xs))])
+
+According to our inductive hypothesis ((apply + (remove-odd xs)) ≡ (sum-even xs)):
+= (cond 
+	[(even? x) (+ x (sum-even xs))]
+	[else (sum-even xs)])
+= (cond 
+	[(even? (first values)) 
+		(+ (first values) (sum-even (rest values)))]
+	[else 
+		(sum-even (rest values))])
+= (sum-even values)
+= (sum-even (cons x xs))
+
+
+
+
