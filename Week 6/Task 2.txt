@@ -1,0 +1,18 @@
+import CodeWorld
+
+type Name = String
+data Grade = A | B | C | D
+data Student = Student Name Grade
+
+studensWithA :: [Student] -> [Name]
+studensWithA [] = []
+studensWithA (Student name A : students) = [name] ++ studensWithA students
+studensWithA (Student name grade : students) = studensWithA students
+
+main :: IO()
+main = do
+  print(studensWithA [Student "Jack" D, Student "Jane" A])
+
+
+
+
